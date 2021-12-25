@@ -11,7 +11,7 @@ import scala.concurrent.{Future, duration}
 import scala.concurrent.duration.{DurationInt, SECONDS, TimeUnit}
 import scala.language.postfixOps
 
-case class Product(name: String, brand: String)
+case class Product(name: String, item_id: Int, local: String, click: Long, purchase: Long)
 
 object ProductDB{
   case object FindAllProducts
@@ -42,7 +42,7 @@ class ProductService extends Actor with ActorLogging{
 
 trait ProductJsonProtocol extends DefaultJsonProtocol{
 
-  implicit val productFormat = jsonFormat2(Product) // jsonFormat 2 çünkü Product class'ı 2 parametreye sahip
+  implicit val productFormat = jsonFormat5(Product)
 
 }
 
@@ -52,28 +52,13 @@ object RestAPIServer extends App with ProductJsonProtocol {
   implicit val materializer = ActorMaterializer()
   import system.dispatcher
 
-  //JSON marshalling
-  val product = Product("iphone 13 pro max" ,"Apple")
-  println(product.toJson.prettyPrint)
-
-  //JSON unmarshalling
-  val stringProduct =
-    """
-      |{
-      |  "brand": "Apple",
-      |  "name": "iphone 13 pro max"
-      |}
-      |""".stripMargin
-
-  println(stringProduct.parseJson.convertTo[Product])
-
   val productDb = system.actorOf(Props[ProductService],"productActor") // actor oluşturuyoruz
 
   val productList = List(
-    Product("iphone 13","Apple"),
-    Product("iMac","Apple"),
-    Product("MacBook pro ","Apple"),
-    Product("MacBook air ","Apple")
+    Product("iphone 13", 1, "China", 250, 50),
+    Product("iMac", 2, "China", 250, 50),
+    Product("MacBook ", 3, "China", 250, 50),
+    Product("MacBook air ", 4, "China", 250, 50)
   )
 
   productList.foreach { product =>

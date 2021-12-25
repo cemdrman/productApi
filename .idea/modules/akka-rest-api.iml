@@ -12,6 +12,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sbt: com.carrotsearch:hppc:0.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-core:2.8.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.8.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.dataformat:jackson-dataformat-smile:2.8.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.8.11:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.spullara.mustache.java:compiler:0.9.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.tdunning:t-digest:3.2:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-actor-typed_2.13:2.6.8:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-actor_2.13:2.6.8:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-http-core_2.13:10.2.7:jar" level="project" />
@@ -23,11 +30,59 @@
     <orderEntry type="library" name="sbt: com.typesafe.akka:akka-stream_2.13:2.6.8:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe:config:1.4.0:jar" level="project" />
     <orderEntry type="library" name="sbt: com.typesafe:ssl-config-core_2.13:0.4.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: commons-codec:commons-codec:1.10:jar" level="project" />
+    <orderEntry type="library" name="sbt: commons-logging:commons-logging:1.1.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-buffer:4.1.32.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-codec-http:4.1.32.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-codec:4.1.32.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-common:4.1.32.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-handler:4.1.32.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-resolver:4.1.32.Final:jar" level="project" />
+    <orderEntry type="library" name="sbt: io.netty:netty-transport:4.1.32.Final:jar" level="project" />
     <orderEntry type="library" name="sbt: io.spray:spray-json_2.13:1.3.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: joda-time:joda-time:2.10.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: net.sf.jopt-simple:jopt-simple:5.0.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.httpcomponents:httpasyncclient:4.1.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.httpcomponents:httpclient:4.5.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.httpcomponents:httpcore-nio:4.4.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.httpcomponents:httpcore:4.4.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.logging.log4j:log4j-api:2.11.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-analyzers-common:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-backward-codecs:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-core:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-grouping:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-highlighter:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-join:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-memory:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-misc:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-queries:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-queryparser:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-sandbox:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-spatial-extras:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-spatial3d:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-spatial:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.lucene:lucene-suggest:7.7.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.client:elasticsearch-rest-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.client:transport:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.plugin:lang-mustache-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.plugin:parent-join-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.plugin:percolator-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.plugin:rank-eval-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.plugin:reindex-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch.plugin:transport-netty4-client:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:elasticsearch-cli:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:elasticsearch-core:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:elasticsearch-secure-sm:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:elasticsearch-ssl-config:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:elasticsearch-x-content:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:elasticsearch:6.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.elasticsearch:jna:4.5.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.hdrhistogram:HdrHistogram:2.1.9:jar" level="project" />
     <orderEntry type="library" name="sbt: org.reactivestreams:reactive-streams:1.0.3:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-java8-compat_2.13:0.9.0:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang.modules:scala-parser-combinators_2.13:1.1.2:jar" level="project" />
     <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.13.7:jar" level="project" />
     <orderEntry type="library" name="sbt: org.slf4j:slf4j-api:1.7.30:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.yaml:snakeyaml:1.17:jar" level="project" />
   </component>
 </module>

@@ -1,49 +1,32 @@
-import ProductDB.{AddProduct, AddedProduct, FindAllProducts, FindProduct}
+import ElasticSearchProduct.FindAllProducts
 import akka.actor.{Actor, ActorLogging, ActorSystem, Props}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.model.{ContentTypes, HttpEntity, HttpMethods, HttpRequest, HttpResponse, StatusCodes, Uri}
 import akka.pattern.ask
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
+import org.elasticsearch.search.sort.SortOrder
 import spray.json._
 
 import scala.concurrent.{Future, duration}
 import scala.concurrent.duration.{DurationInt, SECONDS, TimeUnit}
 import scala.language.postfixOps
 
-case class Product(name: String, item_id: Int, local: String, click: Long, purchase: Long)
+case class Product(name: String, item_id: String, local: String, click: Long, purchase: Long)
 
-object ProductDB{
+object ElasticSearchProduct{
   case object FindAllProducts
-  case class FindProduct(id: Int)
-  case class AddProduct(product: Product)
-  case class AddedProduct(id: Int)
 }
 
 class ProductService extends Actor with ActorLogging{
 
-  var productsList : Map[Int, Product] = Map()
-  var productId: Int = 0
+  val elasticClient = new ElasticClient()
 
   override def receive: Receive = {
     case FindAllProducts =>
-      log.info("finfing all products")
-      sender() ! productsList.values.toList
-    case FindProduct(id) =>
-      log.info(s"founding product by id: $id")
-      sender() ! productsList.get(id)
-    case AddProduct(product: Product) =>
-      log.info("adding new product")
-      productsList += (productId -> product)
-      sender() ! AddedProduct(productId)
-      productId += 1
+      log.info("finding all products")
+      sender() ! elasticClient.findAllProduct(10,0,"name", SortOrder.ASC)
   }
-}
-
-trait ProductJsonProtocol extends DefaultJsonProtocol{
-
-  implicit val productFormat = jsonFormat5(Product)
-
 }
 
 object RestAPIServer extends App with ProductJsonProtocol {
@@ -52,17 +35,19 @@ object RestAPIServer extends App with ProductJsonProtocol {
   implicit val materializer = ActorMaterializer()
   import system.dispatcher
 
-  val productDb = system.actorOf(Props[ProductService],"productActor") // actor oluşturuyoruz
+  val productActor = system.actorOf(Props[ProductService],"productActor") // actor oluşturuyoruz
 
   val productList = List(
-    Product("iphone 13", 1, "China", 250, 50),
-    Product("iMac", 2, "China", 250, 50),
-    Product("MacBook ", 3, "China", 250, 50),
-    Product("MacBook air ", 4, "China", 250, 50)
+    Product("iphone 13", "1", "China", 250, 50),
+    Product("iMac", "2", "China", 250, 50),
+    Product("MacBook ", "3", "China", 250, 50),
+    Product("MacBook air ", "4", "China", 250, 50)
   )
 
+  val elasticClient = new ElasticClient()
+
   productList.foreach { product =>
-    productDb ! AddProduct(product)
+    elasticClient.addProduct(product)
   }
 
   // Server
@@ -70,7 +55,7 @@ object RestAPIServer extends App with ProductJsonProtocol {
 
   val requestHandler: HttpRequest => Future[HttpResponse] = {
     case HttpRequest(HttpMethods.GET, Uri.Path("/api/products"),_,_,_) =>
-      val productFuture : Future[List[Product]]= (productDb ? FindAllProducts).mapTo[List[Product]]
+      val productFuture : Future[List[Product]]= (productActor ? FindAllProducts).mapTo[List[Product]]
       productFuture.map{ products =>
         HttpResponse(
           entity = HttpEntity(
